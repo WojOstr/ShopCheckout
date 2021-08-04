@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  label {
+    font: 1rem 'Fira Sans', sans-serif;
+  }
+  input.myradio {
+    border:none;
+    width:auto;
+    height:auto;
+  }
+  input[type=text] {
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+    border: 3px solid #ccc;
+    -webkit-transition:0.5s;
+    transition:0.5s;
+    outline:none;
+  }
+  input[type=text]:focus {
+    border: 3px solid #555;
+  }
+
+  input[type=password] {
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+    border: 3px solid #ccc;
+    -webkit-transition:0.5s;
+    transition:0.5s;
+    outline:none;
+  }
+  input[type=password]:focus {
+    border: 3px solid #555;
+  }
+  input[type=tel] {
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+    border: 3px solid #ccc;
+    -webkit-transition:0.5s;
+    transition:0.5s;
+    outline:none;
+  }
+  input[type=tel]:focus {
+    border: 3px solid #555;
+  }
+  select {
+    width: 100%;
+    padding:10px;
+    border-radius:10px;
+    border: 3px solid #ccc;
+    -webkit-transition:0.5s;
+    transition:0.5s;
+    outline:none;
+    margin: 10px 0;
+    color: #555;
+  }
+  input[type=radio] {
+    border: 0px;
+    width: 100%;
+    height: 2em;
+}
+  #wrapper {
+    margin-right: auto; 
+    margin-left: auto;
+    width:930px;
+    display:flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+  }
+  #left {
+    width:300px;
+    margin-bottom:5px;
+
+  }
+  #middle {
+    width:300px;
+
+    margin-bottom:5px;
+
+  }
+  #right {
+    width:300px;
+    margin-bottom:5px;
+    
+ 
+  }
+  
+  .headers {
+      background-color:rgb(177, 144, 127);
+      font-family: arial;
+      height:50px;
+      margin-top:10px;
+      margin-bottom:5px;
+      padding-left:20px;
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+
+  }
+  .headersTitle {
+    color:White;
+  }
+  table {
+    border-collapse:separate;
+    border-spacing:0 5px;
+    table-layout:fixed;
+  }
+  table tr {
+    height:40px;
+  }
+  #login {
+    width:300px;
+  }
+  #buttonLogin {
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:5px;
+    border: 2px solid red;
+    color:red;
+    font-family: arial;
+    font-weight: bold;
+    border-radius:10px;
+    background:white;
+    height:40px;
+  }
+  #buttonLogin:hover {
+    background: lightgray;
+  }
+  #buttonLogin:active {
+    background:white;
+  }
+  #loginText {
+    text-align:center;
+    margin-bottom:15px;
+  }
+  input {
+    width:100%;
+  }
+  .shipImages {
+    display:block;
+    width:30px;
+    height:auto;
+    margin-right:5px;
+  }
+  .shipText {
+    font-family:arial;
+    font-size:11px;
+    font-weight: bold;
+  }
+  .tableFirstColumn {
+    width:10%;
+  }
+  #product {
+    display:flex;
+    justify-content: left;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-bottom:1px dotted green;
+  }
+  #productImg {
+    width:40%;
+    background:red;
+  }
+  .productsImg {
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  #productDescription {
+    width:50%;
+
+  }
+  #productPrice {
+    width:10%;
+    text-align:right;
+    padding-right:5px;
+  }
+  #productDesc {
+    padding-left:5px;
+  }
+  #productQua {
+    padding-top:15px;
+    padding-left: 5px;
+    font-size:small;
+  }
+  #sum {
+    border-bottom:1px dotted green;
+    margin-bottom:15px;
+  }
+  #wholeSum, #partSum {
+    display:flex;
+    justify-content: space-between;
+
+    padding:5px;
+
+  }
+  #wholeSum {
+    font-weight: bold;
+    font-size:1.5em;
+  }
+  #finalTextArea {
+    margin-bottom:15px;
+  }
+  #comment {
+    width:100%;
+    border-radius: 5px;
+    height:80px;
+    padding: 10px;
+    resize:none;
+  }
+  #finalCheckBox {
+    padding:5px;
+
+  }
+  #finalNewsletter {
+    margin-bottom:15px;
+  }
+  #finalNewsletter label {
+    font-size:0.8em;
+    font-family:arial;
+  }
+  #finalTerms {
+    margin-bottom:15px;
+  }
+  #finalTerms label {
+    font-size:0.8em;
+    font-family:arial;
+  }
+  #submitOrder {
+    width:100%;
+    height:75px;
+    background:red;
+    border:none;
+    color:white;
+    font-size:1.2em;
+    font-weight:bold;
+    border-radius:5px;
+  }
+  #submitOrder:hover {
+    border:1px solid darkred;
+    background: pink;
+  }
+  #submitOrder:active {
+    background:red;
+  }
+
+  .formcheck {
+    display:none;
+  }
+  #popupOrder {
+    display: none;
+    width:200px;
+    position:fixed;
+    z-index:1;
+    left: 50;
+    top: 20;
+    overflow: auto;
+    background-color:rgb(139, 129, 129);
+    border-radius:10px;
+  }
+
+  #popupOrderContent {
+    height:100%;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius:10px;
+  }
+
+  #close {
+    color: #aaa;
+    float: right;
+    font-size:18px;
+    font-weight:bold;
+  }
+  .error {
+    color:red;
+  }
+  #popupLogin {
+    margin-right: auto; 
+    margin-left: auto;
+    align-content:center;
+    display: none;
+    height:180px;
+    width:200px;
+    z-index:1;
+    left: 50;
+    top: 20;
+    overflow: auto;
+    background-color: whitesmoke;
+
+  }
+  #popupLogin input {
+    width:90%;
+  }
+
+  #popupLoginContent {
+    height:100%;
+    padding: 5px;
+    border: 1px solid black;
+  }
+  #closeLogin {
+    background-color:white;
+    color: black;
+    height:10%;
+
+    font-weight:bold;
+    float:right;
+  }
+  #formlogin {
+    height:90%;
+  }
+  #loginsubmit {
+    width:100%;
+    height:25px;
+    background:white;
+    border:none;
+    color:rgb(17, 16, 16);
+    font-size:1.2em;
+    font-weight:bold;
+    border-radius:5px;
+  }
+  .grecaptcha-badge { 
+    visibility: hidden;
+}
+a {
+  text-decoration:none;
+
+}
+#googleBadge {
+  font-size:small;
+  color:lightgray;
+  
+}
+
+  @media screen and (max-width:930px) {
+    #wrapper {
+      width:620px;
+      flex-direction:row;
+      flex-wrap:wrap;}
+  }
+  @media screen and (max-width:620px) {
+    #wrapper {
+      width:310px;
+      flex-direction:column;
+      flex-wrap:wrap;}
+    #right {
+      align-self: flex-start;
+    }
+  }
+
+  @media screen and (max-width:310px) {
+    #wrapper {
+      flex-direction:column;}
+  }
