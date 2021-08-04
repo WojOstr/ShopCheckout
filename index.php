@@ -19,11 +19,11 @@ $_SESSION['vf'] = $vf;
 		</title>
 		<link rel="stylesheet" href="./styles/styles.css">
 		<script src="https://www.google.com/recaptcha/api.js?render=6Le97tsbAAAAAEFpxAhEZtI-jd5rJA4OCQeWPsII"></script>
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
 
 	</head>
 	<body>
 	<div id = "wrapper">
-		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
 		<script type="text/javascript" src="./jsfiles/popupOrderWrap.js"> </script>
 		<div id="popupOrder"> 
 			<div id="popupOrderContent">
@@ -39,13 +39,13 @@ $_SESSION['vf'] = $vf;
 			</div>	
 			<div class="content">
 				<div id = "login">
-					<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
+					
 					<script type="text/javascript" src="./jsfiles/popupLoginOpen.js"> </script>
 					<input type="button" value="Logowanie" id = "buttonLogin" >
 					<p id="loginText">Masz już konto? Zaloguj się!</p>
 					<div id="popupLogin"> 
 						<div id="popupLoginX">
-							<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
+							
 							<script type="text/javascript" src="./jsfiles/popupLoginWrap.js"> </script>
 							<button id="closeLogin">X</button>
 						</div>
@@ -61,7 +61,7 @@ $_SESSION['vf'] = $vf;
 				<div id = "registerDiv">
 					<input type="checkbox" name="register" id="register" style="width:auto" >
 					<label for="register">Stwórz nowe konto</label>
-					<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
+					
 					<script type="text/javascript" src="./jsfiles/registerWrap.js"> </script>
 				</div>
 				<div class = "hiddenRegister" style="display:none;">
@@ -94,7 +94,7 @@ $_SESSION['vf'] = $vf;
 				<div class="tableGrid">
 					<table>
 						<tr>
-						<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
+						
 						<script type="text/javascript" src="./jsfiles/checkingShip.js"> </script>
 							<td style="width:10%">
 								<input class = "myradio" type="radio" id="inpost" name="ship" value="1"  v-model="ship">
@@ -159,7 +159,7 @@ $_SESSION['vf'] = $vf;
 				<p class = "headersTitle">3. METODA PŁATNOŚCI</p>
 				<!-- Prawdopodobnie lepiej byłoby printować dane z bazy -->
 			</div>	
-			<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
+			
 			<script type="text/javascript" src="./jsfiles/paymentWrap.js"> </script>
 			<div class="content">
 				<div class="tableGrid">
@@ -211,7 +211,7 @@ $_SESSION['vf'] = $vf;
 					</table>
 
 					<div id = "login">
-						<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
+						
 						<script type="text/javascript" src="./jsfiles/checkingDiscount.js"> </script>
 						<input type="text" placeholder="Wpisz kod rabatowy" id = "discount"  name="discountcode" v-model="discountcode">
 						<p class="discountcomment"></p>
@@ -264,7 +264,7 @@ $_SESSION['vf'] = $vf;
 					<div id="wholeSum">
 						<p>Łącznie</p>
 						<div id="wholeSumPrice">
-							<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
+							
 							<script type="text/javascript" src="./jsfiles/calculatePrice.js"> </script>
 							<p id="wholeSumText"></p>
 						</div>
@@ -284,7 +284,7 @@ $_SESSION['vf'] = $vf;
 							<label for="terms">Zapoznałem się z <a href="#">Regulaminem</a> Zakupów</label>
 						</div>
 						<div id = "finalSubmit">
-							<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
+							
 							<script type="text/javascript" src="./jsfiles/formSubmit.js"> </script>
 							<input type="submit" value="POTWIERDŹ ZAKUP" id = "submitOrder" name="submit">
 							<div id="googleBadge">
@@ -296,7 +296,7 @@ $_SESSION['vf'] = $vf;
 							<input type="hidden" name="token" id="token">
 	
 						</form>
-						<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
+						
 						<script type="text/javascript">
 						grecaptcha.ready(function () {
 							grecaptcha.execute('6Le97tsbAAAAAEFpxAhEZtI-jd5rJA4OCQeWPsII', { action: 'homepage' }).then(function (token) {
