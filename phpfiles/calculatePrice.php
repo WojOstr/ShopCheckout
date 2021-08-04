@@ -1,8 +1,8 @@
 <?php
+// Liczenie ceny we frontendzie
 include 'connection.php';
 include 'viewfunctions.php';
 session_start();
-
 $db = new database();
 $discount = $_POST['discount'];
 $productid = $_POST['productid'];

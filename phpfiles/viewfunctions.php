@@ -1,7 +1,7 @@
 <?php
 class viewfunctions {
     
-
+    // Funkcja która wyświetla cenę przesyłki, z formatowaniem.
     public function viewShip($sql, $method) {
         $stmt = $sql->prepare("SELECT `ShippmentPrice` FROM `shippment` WHERE `IDShippment` = ?");
         $stmt->bind_param('s', $method);
@@ -16,6 +16,7 @@ class viewfunctions {
         
         return $datavalue;
     }
+     // Funkcja która pobiera rzeczy z tabeli produkt
     public function viewProduct($sql, $productid) {
         $stmt = $sql->prepare("SELECT `ProductName`, `ProductPrice`, `ProductPhoto` FROM `products` WHERE `IDProduct` = ?");
         $stmt->bind_param('i', $productid);
@@ -25,7 +26,7 @@ class viewfunctions {
         return $resultrow;
     }
 
-
+    // Sprawdzenie poprawności kodu wpisywanego przez użytkownika
     public function checkDiscount($sql, $discountName) {
         $stmt = $sql->prepare("SELECT `DiscountAmount` FROM `discount` WHERE `DiscountCode` = ? AND `DiscountIsOnline` = 1");
         $stmt->bind_param("s", $discountName);
@@ -41,6 +42,7 @@ class viewfunctions {
         
     }
 
+    // Liczenie ceny ostatecznej we frontendzie
     function calculateprice($sql,$productid, $shippment, $discountcode, $quantity) {
         $ppresult = $sql->query("SELECT `ProductPrice` FROM `products` WHERE `IDProduct` = '".$productid."'");
         $spresult = $sql->query("SELECT `ShippmentPrice` FROM `shippment` WHERE `IDShippment` = '".$shippment."'");

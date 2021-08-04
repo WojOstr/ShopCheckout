@@ -87,8 +87,9 @@ $_SESSION['vf'] = $vf;
 		<div id="middle">
 			<div class="headers">
 				<img src="./pngfiles/ship.png" class="shipImages">
-				<p class = "headersTitle">2. METODA DOSTAWY</p>
-			</div>	
+				<p class = "headersTitle">2. METODA DOSTAWY</p> 
+			</div>
+			<!-- Prawdopodobnie lepiej byłoby printować dane z bazy -->
 			<div class="content">
 				<div class="tableGrid">
 					<table>
@@ -156,6 +157,7 @@ $_SESSION['vf'] = $vf;
 			<div class="headers">
 				<img src="./pngfiles/payment.png" class="shipImages">
 				<p class = "headersTitle">3. METODA PŁATNOŚCI</p>
+				<!-- Prawdopodobnie lepiej byłoby printować dane z bazy -->
 			</div>	
 			<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
 			<script type="text/javascript" src="./jsfiles/paymentWrap.js"> </script>
@@ -231,6 +233,8 @@ $_SESSION['vf'] = $vf;
 				
 				?>
 				<div id="product">
+					<!-- Prawdopodobnie lepiej byłoby printować dane z bazy -->
+					<!-- I utworzyć klasę koszyk lub koszyk oparty na sesjach -->
 					<div id="productImg"> 
 						<p>
 						<?php

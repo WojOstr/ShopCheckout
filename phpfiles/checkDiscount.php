@@ -1,4 +1,5 @@
 <?php
+// Sprawdzanie kodu w frontendzie
 include ('connection.php');
 include ('viewfunctions.php');
 session_start();

@@ -18,6 +18,7 @@ class functions {
         $this->comment = $comment;
     }
 
+    //Liczenie ceny ostatecznej
     public function calculateprice($sql) {
         $ppresult = $sql->query("SELECT `ProductPrice` FROM `products` WHERE `IDProduct` = '".$this->productid."'");
         $spresult = $sql->query("SELECT `ShippmentPrice` FROM `shippment` WHERE `IDShippment` = '".$this->shippment."'");
@@ -31,6 +32,7 @@ class functions {
         return $finalprice;
     }
 
+    //Tworzenie rekordu w tabelii orders
     public function placeorder($sql) {
         $finalprice = $this->calculateprice($sql);
         
@@ -41,6 +43,7 @@ class functions {
         return $sql->insert_id;
     }
 
+    //Tabela gdzie mogłaby występować relacja wiele do wielu
     public function userorder($sql, $orderid) {
         $rc = $sql->query("INSERT INTO `productorders`(`IDOrders`, `IDProduct`) VALUES ('".$orderid."','".$this->productid."')");
         if ($rc) {

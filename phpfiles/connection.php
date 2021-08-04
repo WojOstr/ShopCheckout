@@ -1,4 +1,5 @@
 <?php
+// Klasa połączenia z bazą danych, zmienić dane jeśli potrzebne
 class database {
     public $db_connection = false;
     protected $host = "localhost";

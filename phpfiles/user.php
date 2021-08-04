@@ -21,7 +21,7 @@ class user {
         $this->city = $city;
         $this->phone = $phone;
     }
-
+    //Tworzenie klienta
     public function registration($sql) {
         $stmt = $sql->prepare("INSERT INTO users
         (UserLogin, UserPassword, UserName, UserSurname, UserCountry, UserAddress, UserZipCode, UserCity, UserPhone) 
