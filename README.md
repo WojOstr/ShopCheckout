@@ -1,5 +1,5 @@
 # ShopCheckout
-Zadanie rekrutacyjne\
+Zadanie rekrutacyjne
 
 
 Baza danych do wgrania znajduje się w pliku "shopcashout.sql"\
