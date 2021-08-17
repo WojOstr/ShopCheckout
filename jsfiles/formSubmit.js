@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     
     $('#registerOrder').submit(function(e) {
-        //e.preventDefault();
+        e.preventDefault();
         var url = $(this).attr('action');
         var data = $(this).serialize()
         console.log(data)

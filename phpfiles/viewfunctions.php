@@ -32,11 +32,19 @@ class viewfunctions {
         $stmt->bind_param("s", $discountName);
         if($stmt->execute()){
             $result = $stmt->get_result();
-            $resultrow = $result->fetch_row()[0];
-            return $resultrow;
+            if (mysqli_num_rows($result) > 0){
+                $resultrow = $result->fetch_row()[0];
+                return $resultrow;
+            }
+            else {
+                $resultrow = "";
+                return $resultrow;
+            }
+            
         }
         else {
-            return false;
+            $resultrow = "";
+            return 0;
         }
         
         

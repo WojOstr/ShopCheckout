@@ -1,10 +1,10 @@
 $(document).ready(function(){
     $( '#register' ).click(function() {
         if($( '.hiddenRegister' ).is(":visible")){
-            $( '.hiddenRegister' ).toggle("slow");
+            $( '.hiddenRegister' ).hide();
             $( '#register').prop('checked', false);
         } else{
-            $( '.hiddenRegister' ).toggle("slow");
+            $( '.hiddenRegister' ).show();
             $( '#register').prop('checked', true);
         }
 

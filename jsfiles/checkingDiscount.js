@@ -1,7 +1,6 @@
 $(document).ready(function(){
     $('#discount').on('input',function(){
         var discount = $('input[name="discountcode"]').val();
-        console.log(discount);
         $.ajax({
             type: "POST",
             url: "./phpfiles/checkDiscount.php",
@@ -9,14 +8,18 @@ $(document).ready(function(){
             dataType:"json",
             encode:true,
         }).done(function(done){
-            $('p.discountcomment').text("Successfully Added Discount Code!");
-            $('p.getdiscountcode').text(done +" %");
-            $('p.discountcomment').css({'color' :'green'});
+            if (done == false){
+                $('p.discountcomment').text("Wrong Code!");
+                $('p.getdiscountcode').text('');
+                $('p.discountcomment').css({'color' : 'red'});
+            }
+            else {
+                $('p.discountcomment').text("Successfully Added Discount Code!");
+                $('p.getdiscountcode').text(done +" %");
+                $('p.discountcomment').css({'color' :'green'});
+            }
+
         })
-        .fail(function(data) {
-            $('p.discountcomment').text("Wrong Code!");
-            $('p.discountcomment').css({'color' : 'red'});
-          });
     })
     
 });
