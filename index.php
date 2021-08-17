@@ -18,7 +18,10 @@ $_SESSION['vf'] = $vf;
 			Checkouts
 		</title>
 		<link rel="stylesheet" href="./styles/styles.css">
-		<script src="https://www.google.com/recaptcha/api.js?render=6Le97tsbAAAAAEFpxAhEZtI-jd5rJA4OCQeWPsII"></script>
+		<script src="https://www.google.com/recaptcha/api.js?" async defer></script>
+
+
+
 		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
 
 	</head>
@@ -292,18 +295,13 @@ $_SESSION['vf'] = $vf;
 							<a href="https://policies.google.com/privacy">Privacy Policy</a> and
 							<a href="https://policies.google.com/terms">Terms of Service</a> apply.
 							</div>
+							<div class="g-recaptcha" data-sitekey="6LcNxggcAAAAAHc8gtEc5-p3k2H4SvorNu11T_pl"></div>
 							<div class="formerrors" ></div>
-							<input type="hidden" name="token" id="token">
-	
+							
+
 						</form>
 						
-						<script type="text/javascript">
-						grecaptcha.ready(function () {
-							grecaptcha.execute('6Le97tsbAAAAAEFpxAhEZtI-jd5rJA4OCQeWPsII', { action: 'homepage' }).then(function (token) {
-								document.getElementById("token").value = token;
-    							});
-						});
-						</script>
+
 						</div>
 					</div>
 				</div>
