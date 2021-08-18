@@ -43,7 +43,7 @@ class user {
 
     //sprawdzanie czy jest taki user
     public function checkUser($sql, $login) {
-        if (isset($login) ){
+        if (!empty($login) ){
             $stmt = $sql->prepare("SELECT * FROM `users` WHERE `UserLogin` = ?");
             $stmt->bind_param("s", $login);
             $stmt->execute();

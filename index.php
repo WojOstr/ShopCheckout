@@ -25,22 +25,21 @@ $_SESSION['vf'] = $vf;
 	</head>
 	<body>
 	<div id = "wrapper">
-		<script type="text/javascript" src="./jsfiles/popupOrderWrap.js"> </script>
-		<div id="popupOrder"> 
-			<div id="popupOrderContent">
-				<button id="close">X</button>
-				<p>Dziękujemy za zamówienie!</p>
-				<p class="orderid"></p>
-			</div>
-		</div>
 		<div id="left">
 			<div class="headers">
 				<img src="./pngfiles/human.png" class="shipImages">
 				<p class = "headersTitle">1. TWOJE DANE</p>
 			</div>	
 			<div class="content">
+				<script type="text/javascript" src="./jsfiles/popupOrderWrap.js"> </script>
+				<div id="popupOrder"> 
+					<div id="popupOrderContent">
+						<button id="close">X</button>
+						<p>Dziękujemy za zamówienie!</p>
+						<p class="orderid"></p>
+					</div>
+				</div>
 				<div id = "login">
-					
 					<script type="text/javascript" src="./jsfiles/popupLoginOpen.js"> </script>
 					<input type="button" value="Logowanie" id = "buttonLogin" >
 					<p id="loginText">Masz już konto? Zaloguj się!</p>
@@ -59,6 +58,7 @@ $_SESSION['vf'] = $vf;
 						</div>
 					</div>
 				</div>
+
 				<div id = "registerDiv">
 					<input type="checkbox" name="register" id="register" style="width:auto" >
 					<label for="register">Stwórz nowe konto</label>

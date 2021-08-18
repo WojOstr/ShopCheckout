@@ -6,24 +6,32 @@ include ('functions.php');
 $db = new database();
 $errors; $login; $password; $res;
 
-if(isset($_POST['login']) && !empty($_POST['login'])) {
-    if((isset($_POST['password']) && !empty($_POST['password'])) xor (isset($_POST['password2']) && !empty($_POST['password2']))){
-        $errors['loginerror'] = "Proszę wprowadzić login i hasła";
+if (!empty($_POST['login'])) {
+    if(empty($_POST['password'])) {
+        $errors['loginerror'] = "Wprowadź pierwsze hasło";
     }
-    else {
+    if(empty($_POST['password2'])){
+        $errors['loginerror'] = "Potwierdź hasło";
+    }
+    if(!empty($_POST['password']) && !empty($_POST['password2'])){
         $errors['loginerror'] = NULL;
     }
 }
-if(isset($_POST['password']) || isset($_POST['password2'])) {
-    if(!empty($_POST['password']) && !empty($_POST['password2']))
-        if(!isset($_POST['login'])){
-            $errors['loginerror'] = "Proszę wprowadzić login i hasła";
-        }   
-
-} 
-else {
-    $errors['loginerror'] = NULL;
-}//sprawdzenie loginu i hasła
+else if (empty($_POST['login'])) {
+    if(!empty($_POST['password']) && !empty($_POST['password2'])){
+        $errors['loginerror'] = "Wprowadź login";
+    }
+    if(!empty($_POST['password']) && empty($_POST['password2'])){
+        $errors['loginerror'] = "Wprowadź login i potwierdź hasło";
+    }
+    if(!empty($_POST['password2']) && empty($_POST['password'])) {
+        $errors['loginerror'] = "Wprowadź login i hasło";
+    }
+    if (empty($_POST['password']) && empty($_POST['password2']))
+    {
+        $errors['loginerror'] = NULL;
+    }
+}
 
 if((isset($_POST['login']) && isset($_POST['password'])) && isset($_POST['password2'])) {
     if ($_POST['password'] != $_POST['password2']) {
@@ -34,8 +42,12 @@ if((isset($_POST['login']) && isset($_POST['password'])) && isset($_POST['passwo
         $login = $_POST['login'];
         $password = $_POST['password'];
     }
- 
 }
+if(empty($_POST['password']) && empty($_POST['password2']) && empty($_POST['login'])) {
+    $errors['loginerror'] = NULL;
+}
+
+
 if (!isset($_POST['ship'])) {
     $errors['shiperror'] = "Proszę wybrać opcję dostawy";
 }
