@@ -339,6 +339,10 @@ a {
   color:lightgray;
   
 }
+.formerrors {
+  color:red;
+  font-family: Arial;
+}
 
   @media screen and (max-width:930px) {
     #wrapper {

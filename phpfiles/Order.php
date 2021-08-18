@@ -4,31 +4,37 @@ include ('user.php');
 include ('connection.php');
 include ('functions.php');
 $db = new database();
-$errors;
+$errors; $login; $password; $res;
 
-$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-$recaptcha_secret = '6LcNxggcAAAAAI6zfhULf4ElgTigGu9bxzpgH2SZ'; // secret key
-
-$login; $password; $res;
-
-if(isset($_POST['login']) && isset($_POST['password'])) {
-        $login = $_POST['login'];
-        $password = $_POST['password'];
+if(isset($_POST['login']) && !empty($_POST['login'])) {
+    if((isset($_POST['password']) && !empty($_POST['password'])) xor (isset($_POST['password2']) && !empty($_POST['password2']))){
+        $errors['loginerror'] = "Proszę wprowadzić login i hasła";
     }
-if(isset($_POST['login']) xor isset($_POST['password'])) {
-    $errors['loginerror'] = "Proszę wprowadzić login i hasło";
-}  //sprawdzenie loginu i hasła
+    else {
+        $errors['loginerror'] = NULL;
+    }
+}
+if(isset($_POST['password']) || isset($_POST['password2'])) {
+    if(!empty($_POST['password']) && !empty($_POST['password2']))
+        if(!isset($_POST['login'])){
+            $errors['loginerror'] = "Proszę wprowadzić login i hasła";
+        }   
+
+} 
 else {
     $errors['loginerror'] = NULL;
-}
-if (isset($_POST['password']) && isset($_POST['password2']) ) {
+}//sprawdzenie loginu i hasła
+
+if((isset($_POST['login']) && isset($_POST['password'])) && isset($_POST['password2'])) {
     if ($_POST['password'] != $_POST['password2']) {
         $errors['passworderror'] = "Hasła się nie zgadzają";
     } //sprawdzenie czy hasła są takie same
     else {
         $errors['passworderror'] = NULL;
+        $login = $_POST['login'];
+        $password = $_POST['password'];
     }
-    
+ 
 }
 if (!isset($_POST['ship'])) {
     $errors['shiperror'] = "Proszę wybrać opcję dostawy";
@@ -42,8 +48,10 @@ if (!isset($_POST['payment'])) {
 else {
     $errors['paymenterror'] = NULL;
 }
-if (isset($_POST['recaptchaResponse'])){
-    $recaptcha_response = $_POST['recaptchaResponse'];
+if (isset($_POST['recaptcha'])){
+    $recaptcha_response = $_POST['recaptcha'];
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_secret = '6LcNxggcAAAAAI6zfhULf4ElgTigGu9bxzpgH2SZ'; // secret key
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
     $res = json_decode($recaptcha, true);
     $errors['captchaerror'] = NULL;
@@ -74,18 +82,24 @@ $errors['paymenterror'] == NULL && $errors['captchaerror'] == NULL) {
     $userid = $newuser->registration($db->db_connection);  //tworzenie użytkownika
     
     if ($userid == false) {
-        // ?
+        $errors['userexisterror'] = "Taki użytkownik już istnieje";
+        echo json_encode($errors);
     }
     else {
         $functions = new functions(1, $ship, $discount, $payment, $userid, 1, $comment);
         $orderId = $functions->placeorder($db->db_connection);  //tworzenie zamówienia
         $_SESSION['orderId'] = $orderId;
-    }
-    if ($orderId) {
-        $rc = $functions->userorder($db->db_connection, $orderId);
-        if ($rc) {
-            echo json_encode($orderId);  //zwracanie numeru zamówienia do frontendu
+
+        if ($orderId) {
+            $rc = $functions->userorder($db->db_connection, $orderId);
+            if ($rc) {
+                echo json_encode($orderId);  //zwracanie numeru zamówienia do frontendu
+            }
+        else {
+            $errors['error'] = "unkown error";
         }
+    }
+
     }
 }
 else {

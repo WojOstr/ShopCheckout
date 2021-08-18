@@ -7,6 +7,7 @@ $db = new database();
 $vf = new viewfunctions();
 
 $_SESSION['vf'] = $vf;
+
 ?>
 
 <html>
@@ -19,9 +20,6 @@ $_SESSION['vf'] = $vf;
 		</title>
 		<link rel="stylesheet" href="./styles/styles.css">
 		<script src="https://www.google.com/recaptcha/api.js?" async defer></script>
-
-
-
 		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'> </script>
 
 	</head>
@@ -67,8 +65,9 @@ $_SESSION['vf'] = $vf;
 					
 					<script type="text/javascript" src="./jsfiles/registerWrap.js"> </script>
 				</div>
+				<form id="registerOrder" action="./phpfiles/Order.php" method="POST">
 				<div class = "hiddenRegister" style="display:none;">
-					<form id="registerOrder" action="./phpfiles/Order.php" method="POST">
+					
 						<input type="text" placeholder="Login" name="login" id="login" v-model="login" minlength="3" maxlength="20">
 						<input type="password" placeholder="Hasło" name="password" id="password" minlength="8"  maxlength="20" v-model="password">
 						<input type="password" placeholder="Potwierdz hasło" name="password2" id="password2" minlength="8"  maxlength="20" v-model="password2">
@@ -295,14 +294,13 @@ $_SESSION['vf'] = $vf;
 							<a href="https://policies.google.com/privacy">Privacy Policy</a> and
 							<a href="https://policies.google.com/terms">Terms of Service</a> apply.
 							</div>
+							<input type="hidden" name = "recaptcha" id = "recaptcha" value ="">
 							<div class="g-recaptcha" data-sitekey="6LcNxggcAAAAAHc8gtEc5-p3k2H4SvorNu11T_pl"></div>
 							<div class="formerrors" ></div>
-							
-
-						</form>
 						
 
 						</div>
+					</form>
 					</div>
 				</div>
 
