@@ -2,7 +2,7 @@
 session_start();
 include('./phpfiles/connection.php');
 include('./phpfiles/viewfunctions.php');
-include('./phpfiles/functions.php');
+
 $db = new database();
 $vf = new viewfunctions();
 

@@ -2,7 +2,8 @@
 session_start();
 include ('user.php');
 include ('connection.php');
-include ('functions.php');
+include ('viewfunctions.php');
+
 $_SESSION['vf'] = $vf;
 
 $db = new database();
