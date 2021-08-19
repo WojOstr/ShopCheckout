@@ -3,6 +3,8 @@ session_start();
 include ('user.php');
 include ('connection.php');
 include ('functions.php');
+$_SESSION['vf'] = $vf;
+
 $db = new database();
 $errors; $login; $password; $res;
 
@@ -34,9 +36,22 @@ else if (empty($_POST['login'])) {
 }
 
 if((isset($_POST['login']) && isset($_POST['password'])) && isset($_POST['password2'])) {
+    if (strlen($_POST['login']) < 3 || strlen($_POST['login']) > 20) {
+        $errors['loginlengtherror'] = "Login powinien zawierać od 3 do 20 znaków";
+    }
+    else {
+        $errors['loginlengtherror'] = NULL;
+    }
+    if (strlen($_POST['password']) < 8 || strlen($_POST['password']) > 20) {
+        $errors['passwordlengtherror'] = "Hasło powinno zawierać od 8 do 20 znaków";
+    }
+    else {
+        $errors['passwordlengtherror'] = NULL;
+    }
     if ($_POST['password'] != $_POST['password2']) {
         $errors['passworderror'] = "Hasła się nie zgadzają";
     } //sprawdzenie czy hasła są takie same
+   
     else {
         $errors['passworderror'] = NULL;
         $login = $_POST['login'];
@@ -74,8 +89,9 @@ else {
 
 
 
-if ($errors['loginerror'] == NULL && $errors['passworderror'] == NULL && $errors['shiperror'] == NULL && 
-$errors['paymenterror'] == NULL && $errors['captchaerror'] == NULL) {
+if ($errors['loginerror'] == NULL && $errors['passworderror'] == NULL && $errors['shiperror'] == NULL 
+&& $errors['paymenterror'] == NULL && $errors['captchaerror'] == NULL && $errors['loginlengtherror'] == NULL 
+&& $errors['passwordlengtherror'] == NULL) {
     $name = $_POST['name'];
     $surname = $_POST['surname'];
     $country = $_POST['country'];
@@ -94,24 +110,23 @@ $errors['paymenterror'] == NULL && $errors['captchaerror'] == NULL) {
     $userid = $newuser->registration($db->db_connection);  //tworzenie użytkownika
     
     if ($userid == false) {
-        $errors['userexisterror'] = "Taki użytkownik już istnieje";
+        $errors['userexisterror'] = "Taki użytkownik już istnieje lub nie wprowadzono loginu";
         echo json_encode($errors);
     }
     else {
-        $functions = new functions(1, $ship, $discount, $payment, $userid, 1, $comment);
-        $orderId = $functions->placeorder($db->db_connection);  //tworzenie zamówienia
+        $orderId = $vf->placeorder($db->db_connection, 1, $ship, $discount, 1, $userid, $payment, $comment);  //tworzenie zamówienia
         $_SESSION['orderId'] = $orderId;
 
         if ($orderId) {
-            $rc = $functions->userorder($db->db_connection, $orderId);
+            $rc = $vf->userorder($db->db_connection, $orderId, $userid);
             if ($rc) {
                 echo json_encode($orderId);  //zwracanie numeru zamówienia do frontendu
             }
-        else {
-            $errors['error'] = "unkown error";
+            else {
+                $errors['unknownerror?'] = "error";
+                echo json_encode($errors);
+            }
         }
-    }
-
     }
 }
 else {

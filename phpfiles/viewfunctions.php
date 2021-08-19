@@ -64,4 +64,28 @@ class viewfunctions {
         return $finalprice;
     }
 
+    //Tworzenie rekordu w tabelii orders
+    public function placeorder($sql,$productid, $shippment, $discountcode, $quantity, $customerid, $payment, $comment) {
+        $finalprice = $this->calculateprice($sql,$productid, $shippment, $discountcode, $quantity);
+        
+        $sql->query("INSERT INTO `orders`(`OrdersIDUser`, `OrdersIDShippment`,
+        `OrdersIDPayment`, `OrdersPrice`, `OrdersQuantity`, `OrdersComment`) 
+        VALUES ('".$customerid."','".$shippment."',
+        '".$payment."','$finalprice','".$quantity."','".$comment."')");
+        return $sql->insert_id;
+    }
+
+    //Tabela gdzie mogłaby występować relacja wiele do wielu
+    public function userorder($sql, $orderid, $productid) {
+        $rc = $sql->query("INSERT INTO `productorders`(`IDOrders`, `IDProduct`) VALUES ('".$orderid."','".$productid."')");
+        if ($rc) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+
+    }
+
 }
