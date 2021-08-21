@@ -24,8 +24,11 @@ Postanowiłem użyć Captchy V2, która dużo lepiej radzi sobie na serwerze pos
 
 ------ 
 Aby uruchomić aplikację wykorzystałem oprogramowanie XAMPP. 
+
 Pliki pobrane z repozytorium przenoszę do domyślnego folderu w którym można uruchomić aplikację (W programie XAMPP folder htdocs)
+
 Po uruchomieniu modułów Apache oraz MySQL w wyszukiwarce przechodzę do localhost/phpmyadmin, gdzie wgrywam dołączoną w repozytorium bazę danych(shopcashout.sql).
+
 Po upewnieniu się poprawności załadowania bazy danych, w wyszukiwarce wpisuję localhost. 
 
 
