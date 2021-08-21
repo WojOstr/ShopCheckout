@@ -18,4 +18,7 @@ Dane służące do połączenia z bazą danych:
 W razie potrzeby zmienić nazwę hosta(Plik connection.php), w moim przypadku serwer postawiony był lokalnie.
 
 Stronę uruchamiano poprzez wpisanie localhost w wyszukiwarce. 
+
 Adres 127.0.0.1 nie działał ze względu na problemy z captchą.
+Problemy z Captchą V3 występowały przez dwa dni, klucz nie był przekazywany dalej. 
+Postanowiłem użyć Captchy V2, która dużo lepiej radzi sobie na serwerze postawionym lokalnie.
