@@ -9,12 +9,12 @@ $(document).ready(function(){
             encode:true,
         }).done(function(done){
             if (done == false){
-                $('p.discountcomment').text("Wrong Code!");
+                $('p.discountcomment').text("Zły kod! Cena nie zostanie obniżona");
                 $('p.getdiscountcode').text('');
                 $('p.discountcomment').css({'color' : 'red'});
             }
             else {
-                $('p.discountcomment').text("Successfully Added Discount Code!");
+                $('p.discountcomment').text("Poprawny kod zniżkowy!");
                 $('p.getdiscountcode').text(done +" %");
                 $('p.discountcomment').css({'color' :'green'});
             }

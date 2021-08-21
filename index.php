@@ -78,7 +78,7 @@ $_SESSION['vf'] = $vf;
 							<option value="germany">Niemcy</option>
 						</select>
 						<input type="text" placeholder="Adres *" name="address" id="address"  minlength="3" maxlength="20" v-model="address" required> 
-						<input type="text" placeholder="Kod pocztowy *" name="zipcode" id="zipcode" v-model="zipcode" pattern="[0-9]{2}-[0-9]{3}" required> 
+						<input type="text" placeholder="Kod pocztowy (xx-xxx)*" name="zipcode" id="zipcode" v-model="zipcode" pattern="[0-9]{2}-[0-9]{3}" required> 
 						<input type="text" placeholder="Miasto *" name="city" id="city"  v-model="city" minlength="3" maxlength="20"required>
 						<input type="tel" placeholder="Telefon *" name="phone" id="phone"  v-model="phone" pattern="[0-9]{9}" required>
 					

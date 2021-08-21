@@ -71,10 +71,30 @@ class viewfunctions {
         $sql->query("INSERT INTO `orders`(`OrdersIDUser`, `OrdersIDShippment`,
         `OrdersIDPayment`, `OrdersPrice`, `OrdersQuantity`, `OrdersComment`) 
         VALUES ('".$customerid."','".$shippment."',
-        '".$payment."','$finalprice','".$quantity."','".$comment."')");
+        '".$payment."','".$finalprice."','".$quantity."','".$comment."')");
         return $sql->insert_id;
     }
+    //sprawdzanie czy jest taki user
+    public function checkUser($sql, $login) {
+        if (!empty($login) && isset($login)){
+            $stmt = $sql->prepare("SELECT `IDuser` FROM `users` WHERE `UserLogin` = ?");
+            $stmt->bind_param("s", $login);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows >= 1) {
+                $stmt->close();
+                return true;
+            }
+            else {
+                $stmt->close();
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
 
+    }
     //Tabela gdzie mogłaby występować relacja wiele do wielu
     public function userorder($sql, $orderid, $productid) {
         $rc = $sql->query("INSERT INTO `productorders`(`IDOrders`, `IDProduct`) VALUES ('".$orderid."','".$productid."')");
@@ -82,6 +102,7 @@ class viewfunctions {
             return true;
         }
         else {
+            var_dump($sql->error);
             return false;
         }
 

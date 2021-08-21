@@ -1,39 +1,51 @@
 <?php
-session_start();
 include ('user.php');
 include ('connection.php');
 include ('viewfunctions.php');
+session_start();
 
-$_SESSION['vf'] = $vf;
+
+$vf = $_SESSION['vf']; 
 
 $db = new database();
-$errors; $login; $password; $res;
+
+$errors = array();
+$login; $password; $res;
 
 if (!empty($_POST['login'])) {
     if(empty($_POST['password'])) {
         $errors['loginerror'] = "Wprowadź pierwsze hasło";
     }
-    if(empty($_POST['password2'])){
+    elseif(empty($_POST['password2'])){
         $errors['loginerror'] = "Potwierdź hasło";
     }
-    if(!empty($_POST['password']) && !empty($_POST['password2'])){
+    elseif(!empty($_POST['password']) && !empty($_POST['password2'])){
         $errors['loginerror'] = NULL;
     }
+    else {
+        // ?
+    }
 }
-else if (empty($_POST['login'])) {
+elseif (empty($_POST['login'])) {
     if(!empty($_POST['password']) && !empty($_POST['password2'])){
         $errors['loginerror'] = "Wprowadź login";
     }
-    if(!empty($_POST['password']) && empty($_POST['password2'])){
+    elseif(!empty($_POST['password']) && empty($_POST['password2'])){
         $errors['loginerror'] = "Wprowadź login i potwierdź hasło";
     }
-    if(!empty($_POST['password2']) && empty($_POST['password'])) {
+    elseif(!empty($_POST['password2']) && empty($_POST['password'])) {
         $errors['loginerror'] = "Wprowadź login i hasło";
     }
-    if (empty($_POST['password']) && empty($_POST['password2']))
+    elseif (empty($_POST['password']) && empty($_POST['password2']))
     {
         $errors['loginerror'] = NULL;
     }
+    else {
+        // ?
+    }
+}
+else {
+    // ?
 }
 
 if((isset($_POST['login']) && isset($_POST['password'])) && isset($_POST['password2'])) {
@@ -59,10 +71,30 @@ if((isset($_POST['login']) && isset($_POST['password'])) && isset($_POST['passwo
         $password = $_POST['password'];
     }
 }
-if(empty($_POST['password']) && empty($_POST['password2']) && empty($_POST['login'])) {
+elseif(empty($_POST['password']) && empty($_POST['password2']) && empty($_POST['login'])) {
     $errors['loginerror'] = NULL;
 }
-
+else {
+    // ?
+}
+if (preg_match('~[0-9\W]+~', $_POST['name'])) {
+   $errors['nameerror'] = "Imię nie może zawierać liczb i znaków specjalnych";
+}
+else {
+    $errors['nameerror'] = NULL;
+}
+if (preg_match('~[0-9\W]+~', $_POST['surname'])) {
+    $errors['surnameerror'] = "Nazwisko nie może zawierać liczb i znaków specjalnych";
+}
+else {
+    $errors['surnameerror'] = NULL;
+}
+if (preg_match('~[0-9\W]+~', $_POST['city'])) {
+    $errors['cityerror'] = "Miasto nie może zawierać liczb i znaków specjalnych";
+}
+else {
+    $errors['cityerror'] = NULL;
+}
 
 if (!isset($_POST['ship'])) {
     $errors['shiperror'] = "Proszę wybrać opcję dostawy";
@@ -91,8 +123,10 @@ else {
 
 
 if ($errors['loginerror'] == NULL && $errors['passworderror'] == NULL && $errors['shiperror'] == NULL 
-&& $errors['paymenterror'] == NULL && $errors['captchaerror'] == NULL && $errors['loginlengtherror'] == NULL 
-&& $errors['passwordlengtherror'] == NULL) {
+    && $errors['paymenterror'] == NULL && $errors['captchaerror'] == NULL && $errors['loginlengtherror'] == NULL 
+    && $errors['passwordlengtherror'] == NULL && $errors['nameerror'] == NULL && $errors['surnameerror'] == NULL
+    && $errors['cityerror'] == NULL) {
+
     $name = $_POST['name'];
     $surname = $_POST['surname'];
     $country = $_POST['country'];
@@ -106,32 +140,53 @@ if ($errors['loginerror'] == NULL && $errors['passworderror'] == NULL && $errors
     $discount = $_POST['discountcode'];
     $comment = $_POST['comment'];
 
-
-    $newuser = new user($login, $password, $name, $surname, $country, $address, $zipcode, $city, $phone);
-    $userid = $newuser->registration($db->db_connection);  //tworzenie użytkownika
-    
-    if ($userid == false) {
+    $result = $vf->checkUser($db->db_connection, $login);
+    if ($result == true) {
         $errors['userexisterror'] = "Taki użytkownik już istnieje lub nie wprowadzono loginu";
-        echo json_encode($errors);
     }
     else {
-        $orderId = $vf->placeorder($db->db_connection, 1, $ship, $discount, 1, $userid, $payment, $comment);  //tworzenie zamówienia
-        $_SESSION['orderId'] = $orderId;
+        $errors['userexisterror'] = NULL;
+    }
+    if ($errors['userexisterror'] !== NULL) {
+        echo json_encode($errors);
+        exit;
+        }
+    elseif ($errors['userexisterror'] === NULL) {
+        $newuser = new user();
+        $userid = $newuser->registration($db->db_connection, $login, $password, $name, $surname, $country, $address, $zipcode, $city, $phone);  //tworzenie użytkownika
+        if ($userid) {
+            $orderId = $vf->placeorder($db->db_connection, 1, $ship, $discount, 1, $userid, $payment, $comment);  //tworzenie zamówienia
+            if ($orderId) {
+                $rc = $vf->userorder($db->db_connection, $orderId, 1);
+                if ($rc) {
+                    echo $orderId;  //zwracanie numeru zamówienia do frontendu
+                    exit;
+                }
+                else {
 
-        if ($orderId) {
-            $rc = $vf->userorder($db->db_connection, $orderId, $userid);
-            if ($rc) {
-                echo json_encode($orderId);  //zwracanie numeru zamówienia do frontendu
+                    $errors['unknownerror'] = "error";
+                    // Usuwanie użytkownika i zamówienia dodanego w takim przypadku
+                    echo json_encode($errors);
+                    exit;
+                }
             }
             else {
-                $errors['unknownerror?'] = "error";
+                $errors['unknownerror'] = "error";
+                // Usuwanie użytkownika dodanego w takim przypadku
                 echo json_encode($errors);
+                exit;
             }
         }
-    }
+        else {
+            $errors['unknownerror'] = "error";
+            echo json_encode($errors);
+            exit;
+        }
+    }   
 }
 else {
     echo json_encode($errors);
+    exit;
 }
 
 

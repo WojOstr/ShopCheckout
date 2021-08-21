@@ -14,7 +14,6 @@ $(document).ready(function(){
             dataType:"json",
             encode:true,
         }).done(function(done){
-            console.log(done);
             $('p#wholeSumText').text(done);
         })
         .fail(function(data) {

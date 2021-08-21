@@ -1,12 +1,11 @@
 $(document).ready(function(){
-
-    
     $('#registerOrder').submit(function(e) {
         e.preventDefault();
+        $(".formerrors").html('');
+        $('#popupOrder').hide();
         var url = $(this).attr('action');
         $('#recaptcha').val(grecaptcha.getResponse());
         var data = $(this).serialize();
-        console.log(data);
         $.ajax({
             type: "POST",
             url: url,
@@ -15,8 +14,6 @@ $(document).ready(function(){
             encode: true,
         })
         .done(function(data3) {
-            $(".formerrors").text('');
-            console.log(data3)
             if($.isNumeric(data3)){
                 $('#popupOrder').show();
                 $('.orderid').text("Numer zamówienia: "+data3);
