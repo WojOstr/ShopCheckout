@@ -7,13 +7,15 @@
 * Pliki graficzne w folderze "pngfiles"\
 * Plik zawierający style w folderze "styles"
 ---------------------------------------------------------------
-Plików nie należy przemieszczać pomiędzy folderami.
-Bazę danych wykonano w phpMyAdmin, należy ją wgrać.
-Dane służące do połączenia z bazą:
-```php 
-host = localhost, user = root, password = , name = shopcashout
-```
-W razie potrzeby zmienić hosta
+Plików nie należy przemieszczać pomiędzy folderami aby uniknąć konieczności zmiany odwołań.
 
-Stronę uruchamiano poprzez wpisanie localhost w wyszukiwarce. Adres 127.0.0.1 nie działał ze względu na
-problemy z captchą.
+Bazę danych wykonano w phpMyAdmin, należy ją wgrać na serwer.
+
+Dane służące do połączenia z bazą danych:
+```php 
+($host = 'localhost', $user = 'root', $password = '' , $name = 'shopcashout');
+```
+W razie potrzeby zmienić nazwę hosta(Plik connection.php), w moim przypadku serwer postawiony był lokalnie.
+
+Stronę uruchamiano poprzez wpisanie localhost w wyszukiwarce. 
+Adres 127.0.0.1 nie działał ze względu na problemy z captchą.

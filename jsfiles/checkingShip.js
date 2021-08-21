@@ -8,7 +8,6 @@ $(document).ready(function(){
             dataType:"json",
             encode:true,
         }).done(function(done){
-            console.log(done);
             $('p.getshipprice').text(done);
         })
         .fail(function(data) {
