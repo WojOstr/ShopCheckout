@@ -1,5 +1,4 @@
 # ShopCheckout
-## Zadanie rekrutacyjne Smartbees
 ---------------------------------------------------------------
 * Baza danych do wgrania znajduje się w pliku "shopcashout.sql"
 * Pliki Jquery w folderze "jsfiles"
@@ -18,9 +17,6 @@ Dane służące do połączenia z bazą danych:
 W razie potrzeby zmienić nazwę hosta(Plik connection.php).
 
 Stronę uruchamiano poprzez wpisanie localhost w wyszukiwarce. (Adres 127.0.0.1 nie działał ze względu na problemy z captchą)
-
-Dodatkowo napotkałem problemy z Captchą V3, które występowały przez dwa dni. Klucz nie był przekazywany dalej ajaxem, przez problemy z wsparciem lokalnego działania. 
-Postanowiłem użyć Captchy V2, która dużo lepiej radzi sobie na serwerze postawionym lokalnie.
 
 ------ 
 Aby uruchomić aplikację wykorzystałem oprogramowanie XAMPP. 
